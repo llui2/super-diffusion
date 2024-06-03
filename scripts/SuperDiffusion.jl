@@ -100,7 +100,7 @@ function superdiffusion_analysis(model1::String, model2::String, N::Int64, ks1::
         ξ_avg=Float64[], prob_avg=Float64[],
         λ1_avg=Float64[], λ2_avg=Float64[], λa_avg=Float64[],
         σ_λ1=Float64[], σ_λ2=Float64[], σ_λa=Float64[],
-        η_avg=Float64[], prob_η_avg=Float64[], correct=Float64[])
+        η_avg=Float64[], prob_η_avg=Float64[], correct=Float64[], δ=Float64[])
 
     for i in 1:num_ks1
         k1 = ks1[i]
@@ -115,7 +115,7 @@ function superdiffusion_analysis(model1::String, model2::String, N::Int64, ks1::
             λ1_avg, λ2_avg, λa_avg = 0.0, 0.0, 0.0
             list_λ1, list_λ2, list_λa = Float64[], Float64[], Float64[]
             η_avg, prob_η_avg = 0.0, 0.0
-            correct = 0.0
+            correct, δ = 0.0, 0.0
 
             for rep in 1:num_duplex
 
@@ -174,13 +174,20 @@ function superdiffusion_analysis(model1::String, model2::String, N::Int64, ks1::
                         k2_min = minimum(degs2)
                         ka_min = minimum(degsa)
 
+                        k1_max = maximum(degs1)
+                        k2_max = maximum(degs2)
+
+                        if k1_min > k2_max || k2_min > k1_max
+                            δ += 1
+                        end
+
                         η = (ka_min - max(k1_min, k2_min)) / max(k1_min, k2_min)
                         η_avg += η
                         if η > 0
                             prob_η_avg += 1
                         end
 
-                        if has_superdiffusion && η > 0
+                        if has_superdiffusion && η >= 0
                             correct += 1
                         elseif !has_superdiffusion && η < 0
                             correct += 1
@@ -214,6 +221,7 @@ function superdiffusion_analysis(model1::String, model2::String, N::Int64, ks1::
             η_avg /= num_duplex_shortened
 
             correct /= num_duplex_shortened
+            δ /= num_duplex_shortened
 
             σ_λ1 = std(list_λ1)
             σ_λ2 = std(list_λ2)
@@ -234,8 +242,9 @@ function superdiffusion_analysis(model1::String, model2::String, N::Int64, ks1::
             prob_η_avg = round(prob_η_avg, digits=NUM_DIGITS)
 
             correct = round(correct, digits=NUM_DIGITS)
+            δ = round(δ, digits=NUM_DIGITS)
 
-            push!(df, (k1, k2, ka, k1_avg, k2_avg, ka_avg, ξ_avg, prob_avg, λ1_avg, λ2_avg, λa_avg, σ_λ1, σ_λ2, σ_λa, η_avg, prob_η_avg, correct))
+            push!(df, (k1, k2, ka, k1_avg, k2_avg, ka_avg, ξ_avg, prob_avg, λ1_avg, λ2_avg, λa_avg, σ_λ1, σ_λ2, σ_λa, η_avg, prob_η_avg, correct, δ))
         end
     end
 

@@ -6,12 +6,12 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 plt.rc('font', family='Times', size=18)
 plt.rc('mathtext', fontset='cm')
 
-input = "ER-SF-N500-D50"
+input = "ER-ER-N500-D50"
 
 xticks = [5,25,50,75,100]
 yticks = [5,25,50,75,100]
 
-bin_size = 4
+bin_size = 2
 
 k1_min = xticks[0]
 k1_max = xticks[-1] + bin_size
@@ -119,11 +119,20 @@ cmapa.set_position([0.05, 0.05, 0.95, 0.05])
 cmapb.set_position([0.05, 0.05, 0.95, 0.05])
 cmapc.set_position([0.05, 0.05, 0.95, 0.05])
 
-c1a = ax1a.pcolormesh(k1s, k2s, data1a, cmap='viridis', linewidth=0, rasterized=True, vmin=0, vmax=1.0)
-c2a = ax2a.pcolormesh(k1s, k2s, data2a, cmap='viridis', linewidth=0, rasterized=True, vmin=0, vmax=1.0)
-c3a = ax3a.pcolormesh(k1s, k2s, data3a, cmap='viridis', linewidth=0, rasterized=True, vmin=0, vmax=1.0)
+import seaborn as sns
+from matplotlib.colors import ListedColormap
+cmapp = sns.color_palette("blend:#352b87,#007fdf,#3bc181,#ffbb00,#ffd700", as_cmap=True)
+def pastel_cmap(cmap):
+    n = cmap.N
+    pastel_colors = np.clip(cmap(np.linspace(0, 1, n)) + 0.1, 0, 1)
+    return sns.blend_palette(pastel_colors, n_colors=n, as_cmap=True)
+cmapp = pastel_cmap(cmapp)
+
+c1a = ax1a.pcolormesh(k1s, k2s, data1a, cmap=cmapp, linewidth=0, rasterized=True, vmin=0, vmax=1.0)
+c2a = ax2a.pcolormesh(k1s, k2s, data2a, cmap=cmapp, linewidth=0, rasterized=True, vmin=0, vmax=1.0)
+c3a = ax3a.pcolormesh(k1s, k2s, data3a, cmap=cmapp, linewidth=0, rasterized=True, vmin=0, vmax=1.0)
 divider = make_axes_locatable(cmapa)
-cbara = plt.colorbar(c3a, fraction=0.046, pad=0.04, ax=cmapa, ticks=[0, 0.3, 0.7, 1], cax=cmapc.inset_axes((0.89, 12.9, 0.012, 4.8)))
+cbara = plt.colorbar(c3a, fraction=0.046, pad=0.04, ax=cmapa, ticks=[0, 0.3, 0.7, 1], cax=cmapc.inset_axes((0.89, 12.8, 0.012, 4.8)))
 cbara.ax.set_yticklabels(['0', '0.3', '0.7', '1'], fontsize=16)
 cbara.ax.set_ylabel('$p$', rotation=0, fontsize=20, labelpad=9, y=0.55)
 
@@ -131,7 +140,7 @@ c1b = ax1b.pcolormesh(k1s, k2s, data1b, cmap='Reds', linewidth=0, rasterized=Tru
 c2b = ax2b.pcolormesh(k1s, k2s, data2b, cmap='Reds', linewidth=0, rasterized=True, vmin=0, vmax=1.0)
 c3b = ax3b.pcolormesh(k1s, k2s, data3b, cmap='Reds', linewidth=0, rasterized=True, vmin=0, vmax=1.0)
 divider = make_axes_locatable(cmapb)
-cbarb = plt.colorbar(c3b, fraction=0.046, pad=0.04, ax=cmapb, ticks=[0, 0.3, 0.7, 1], cax=cmapc.inset_axes((0.89, 7.1, 0.012, 4.8)))
+cbarb = plt.colorbar(c3b, fraction=0.046, pad=0.04, ax=cmapb, ticks=[0, 0.3, 0.7, 1], cax=cmapc.inset_axes((0.89, 6.9, 0.012, 4.8)))
 cbarb.ax.set_yticklabels(['0', '0.3', '0.7', '1'], fontsize=16)
 cbarb.ax.set_ylabel('$\\Delta$', rotation=0, fontsize=20, labelpad=9, y=0.55)
 
@@ -140,7 +149,7 @@ c1c = ax1c.pcolormesh(k1s, k2s, data1c, cmap='bwr', linewidth=0, rasterized=True
 c2c = ax2c.pcolormesh(k1s, k2s, data2c, cmap='bwr', linewidth=0, rasterized=True, vmin=-lim, vmax=lim)
 c3c = ax3c.pcolormesh(k1s, k2s, data3c, cmap='bwr', linewidth=0, rasterized=True, vmin=-lim, vmax=lim)
 divider = make_axes_locatable(cmapc)
-cbarc = plt.colorbar(c3c, fraction=0.046, pad=0.04, ax=cmapc, ticks=[-lim, 0, lim], cax=cmapc.inset_axes((0.89, 1.35, 0.012, 4.8)))
+cbarc = plt.colorbar(c3c, fraction=0.046, pad=0.04, ax=cmapc, ticks=[-lim, 0, lim], cax=cmapc.inset_axes((0.89, 1.0, 0.012, 4.8)))
 cbarc.ax.set_yticklabels([f'< -{lim}', '0', f'> {lim}'], fontsize=16)
 cbarc.ax.set_ylabel('$\\langle \\eta \\rangle$', rotation=0, fontsize=20, labelpad=-9, y=0.55)
 
@@ -211,4 +220,4 @@ ax3a.set_aspect('equal')
 ax3b.set_aspect('equal')
 ax3c.set_aspect('equal')
 
-plt.savefig(f'plots_SM/figS3-{input}-plot.pdf', dpi=300)
+plt.savefig(f'plots_SM/figS1-{input}-plot.pdf', dpi=300)

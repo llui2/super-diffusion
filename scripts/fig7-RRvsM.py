@@ -60,7 +60,7 @@ ax.set_xlim(25, 55)
 ax.set_ylim(10, 60)
 
 ax.set_xticks(np.arange(25, 60, step=10))
-ax.set_yticks(np.arange(10, 65, step=20))
+ax.set_yticks(np.arange(15, 65, step=20))
 
 leg = plt.legend(loc='best', fancybox=False, shadow=False, frameon=False, ncol=1, fontsize="8", labelspacing=0.6)
 plt.setp(leg.get_lines(), linewidth=.8)
