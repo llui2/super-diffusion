@@ -53,8 +53,8 @@ ax.plot(k, l1_t, color=c[3], marker=' ', markersize=1, linestyle='-', linewidth=
 
 # --- lable + ticks + legend
 
-ax.set_xlabel('$s^{[s]}$', fontfamily='Times')
-ax.set_ylabel('$\\frac{1}{M} \\lambda^{\\mathrm{RR}}_2(M s^{[s]})$', fontfamily='Times')
+ax.set_xlabel('$s^{\\mathcal{A}}$', fontfamily='Times')
+ax.set_ylabel('$\\frac{1}{M} \\lambda^{\\mathrm{RR}}_2(M s^{\\mathcal{A}})$', fontfamily='Times')
 
 ax.set_xlim(25, 55)
 ax.set_ylim(10, 60)

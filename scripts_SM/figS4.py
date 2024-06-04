@@ -121,7 +121,7 @@ c3a = ax3a.pcolormesh(k1s, k2s, data3a, cmap=cmapp, linewidth=0, rasterized=True
 divider = make_axes_locatable(cmapa)
 cbara = plt.colorbar(c3a, fraction=0.046, pad=0.04, ax=cmapa, ticks=[0, 0.3, 0.7, 1], cax=cmapa.inset_axes((0.89, 10.3, 0.012, 6.8)))
 cbara.ax.set_yticklabels(['0', '0.3', '0.7', '1'], fontsize=16)
-cbara.ax.set_ylabel('$p$', rotation=0, fontsize=20, labelpad=9, y=0.55)
+cbara.ax.set_ylabel('$q$', rotation=0, fontsize=20, labelpad=9, y=0.55)
 
 c1b = ax1b.pcolormesh(k1s, k2s, data1b, cmap='Greens', linewidth=0, rasterized=True, vmin=0, vmax=1.0)
 c2b = ax2b.pcolormesh(k1s, k2s, data2b, cmap='Greens', linewidth=0, rasterized=True, vmin=0, vmax=1.0)

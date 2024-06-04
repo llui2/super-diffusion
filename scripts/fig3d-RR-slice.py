@@ -60,12 +60,12 @@ l1_t = li_RR(N, k2, 1)
 ax.plot(k2, l1_t, color=c[1], marker=' ', markersize=1, linestyle='--', linewidth=1, label='$\\lambda_2^{\\mathrm{RR}}(k^{[2]})$')
 
 la_t = li_RR(N, ka, 2)
-ax.plot(k2, la_t, color=c[2], marker=' ', markersize=1, linestyle='--', linewidth=1, label='$\\frac{1}{2} \\lambda_2^{\\mathrm{RR}}(2s^{[s]})$')
+ax.plot(k2, la_t, color=c[2], marker=' ', markersize=1, linestyle='--', linewidth=1, label='$\\frac{1}{2} \\lambda_2^{\\mathrm{RR}}(2s^{\\mathcal{A}})$')
 
 # --- lable + ticks + legend
 
 ax.set_xlabel('$k^{[2]}$', fontfamily='Times')
-ax.set_ylabel('$\\langle \\lambda^{[\\alpha]}_2 \\rangle$', fontfamily='Times')
+ax.set_ylabel('$\\langle \\lambda_2 \\rangle$', fontfamily='Times')
 
 ax.set_xlim(20, 60)
 ax.set_ylim(10, 45)

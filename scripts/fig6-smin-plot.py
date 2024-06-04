@@ -45,7 +45,7 @@ for i in range(1, num_cols+1):
 # --- lable + ticks + legend
 
 ax.set_xlabel('step', fontfamily='Times', fontsize=18)
-ax.set_ylabel('$\\lambda^{[s]}_{2}, \\, s^{[s]}_{\\min}$', fontfamily='Times', fontsize=18)
+ax.set_ylabel('$\\lambda^{\\mathcal{A}}_{2}, \\, s^{\\mathcal{A}}_{\\min}$', fontfamily='Times', fontsize=18)
 # ax.xaxis.set_label_coords(0.5, -0.1)
 # ax.yaxis.set_label_coords(-0.12, 0.5)
 
@@ -57,8 +57,8 @@ ax.locator_params(axis='y', nbins=4)
 import matplotlib.lines as mlines
 import matplotlib.patches as mpatches
 
-a = mlines.Line2D([], [], color='grey', linestyle="--", label="$s^{[s]}_{\\min}$")
-b = mlines.Line2D([], [], color='grey', linestyle="-", label="$\\lambda^{[s]}_{2}$")
+a = mlines.Line2D([], [], color='grey', linestyle="--", label="$s^{\\mathcal{A}}_{\\min}$")
+b = mlines.Line2D([], [], color='grey', linestyle="-", label="$\\lambda^{\\mathcal{A}}_{2}$")
 
 c = mpatches.Patch(color='green', linestyle="-", label="ER")
 d = mpatches.Patch(color='purple', linestyle="-", label="SF")

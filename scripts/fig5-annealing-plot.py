@@ -51,7 +51,7 @@ for i in range(1, num_cols+1):
 # --- lable + ticks + legend
 
 ax.set_xlabel('step', fontfamily='Times', fontsize=18)
-ax.set_ylabel('$\\lambda^{[s]}_2$', fontfamily='Times', fontsize=18)
+ax.set_ylabel('$\\lambda^{\\mathcal{A}}_2$', fontfamily='Times', fontsize=18)
 
 ax.set_xlim(10, )
 ax.set_ylim(29.1, 30)

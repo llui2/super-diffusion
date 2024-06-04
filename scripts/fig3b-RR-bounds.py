@@ -58,7 +58,7 @@ cmap = pastel_cmap(cmap)
 # --- heatmap
 c = ax.pcolormesh(k1s, k2s, data, cmap=cmap, linewidth=0, rasterized=True, vmin=0, vmax=1.0)
 cbar = plt.colorbar(c, fraction=0.046, pad=0.04, ticks=[0, 0.3, 0.7, 1])
-cbar.ax.set_ylabel('$p$', rotation=0, fontsize=20, labelpad=9, y=0.55)
+cbar.ax.set_ylabel('$q$', rotation=0, fontsize=20, labelpad=9, y=0.55)
 
 # --- model
 xlims = [5, 100]

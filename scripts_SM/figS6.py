@@ -5,8 +5,7 @@ import pandas as pd
 plt.rc('font', family='Times', size=18)
 plt.rc('mathtext', fontset='cm')
 
-# input = f'RR-RR-N500-D50-S0-R0'
-input = f'ER-ER-N500-D50-S1-R1'
+input = f'RR-RR-N500-D50-S0-R0'
 
 bin_size = 2
 k1_min = 4
@@ -86,15 +85,12 @@ cmap = 'Blues'
 # heatmap
 c = ax.pcolormesh(k1s, k2s, data, cmap=cmap, linewidth=0, rasterized=True, vmin=0, vmax=1)
 cbar = plt.colorbar(c, fraction=0.046, pad=0.04, ticks=[0, 0.3, 0.7, 1])
-cbar.ax.set_ylabel('$\\Delta p$', rotation=0, fontsize=20, labelpad=9, y=0.55)
+cbar.ax.set_ylabel('$\\Delta q$', rotation=0, fontsize=20, labelpad=9, y=0.55)
 
 # --- lable + ticks + legend
 
-ax.set_xlabel('$\\langle k^{[2]} \\rangle$', fontfamily='Times')
-ax.set_ylabel('$\\langle k^{[1]} \\rangle$', fontfamily='Times')
-
-# ax.set_xlabel('$k_1$', fontfamily='Times')
-# ax.set_ylabel('$k_2$', fontfamily='Times')
+ax.set_xlabel('$k^{[2]}$', fontfamily='Times')
+ax.set_ylabel('$k^{[1]}$', fontfamily='Times')
 
 xticks = [5,25,50,75,100]
 yticks = [5,25,50,75,100]
@@ -107,4 +103,4 @@ ax.set_ylim(yticks[0], yticks[-1])
 
 ax.set_aspect('equal')
 
-plt.savefig(f'plots_SM/figS5-opt-ER.pdf')
+plt.savefig(f'plots_SM/figS6-opt-RR.pdf')

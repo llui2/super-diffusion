@@ -6,10 +6,10 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 plt.rc('font', family='Times', size=18)
 plt.rc('mathtext', fontset='cm')
 
-input = "ER-ER-N500-D50"
+input = "ER-SF-N500-D50"
 
-xticks = [5,150,325,490]
-yticks = [5,150,325,490]
+xticks = [5,25,50,75,100]
+yticks = [5,25,50,75,100]
 
 bin_size = 2
 
@@ -20,7 +20,7 @@ k2_max = yticks[-1] + bin_size
 k1s = np.arange(k1_min, k1_max, bin_size)
 k2s = np.arange(k2_min, k2_max, bin_size)
 #--------------------------------------------
-df = pd.read_csv(f'data/{input}-S0-R0.csv')
+df = pd.read_csv(f'data_SM/{input}-S0-R0.csv')
 data1a = np.zeros((len(k1s), len(k2s)))
 data1b = np.zeros((len(k1s), len(k2s)))
 data1c = np.zeros((len(k1s), len(k2s)))
@@ -35,14 +35,14 @@ for i in range(len(k1s)):
         mask = (df['k1_avg'] >= k1_min) & (df['k1_avg'] < k1_max) & (df['k2_avg'] >= k2_min) & (df['k2_avg'] < k2_max)
         data1a[i, j] = df.loc[mask, 'prob_avg'].sum()
         data1b[i, j] = df.loc[mask, 'correct'].sum()
-        data1c[i, j] = df.loc[mask, 'η_avg'].sum()
+        data1c[i, j] = df.loc[mask, 'ξ_avg'].sum()
         num_rep[i, j] = mask.sum()
 num_rep[num_rep == 0] = 1
 data1a /= num_rep
 data1b /= num_rep
 data1c /= num_rep
 #--------------------------------------------
-df = pd.read_csv(f'data/{input}-S1-R0.csv')
+df = pd.read_csv(f'data_SM/{input}-S1-R0.csv')
 data2a = np.zeros((len(k1s), len(k2s)))
 data2b = np.zeros((len(k1s), len(k2s)))
 data2c = np.zeros((len(k1s), len(k2s)))
@@ -57,14 +57,14 @@ for i in range(len(k1s)):
         mask = (df['k1_avg'] >= k1_min) & (df['k1_avg'] < k1_max) & (df['k2_avg'] >= k2_min) & (df['k2_avg'] < k2_max)
         data2a[i, j] = df.loc[mask, 'prob_avg'].sum()
         data2b[i, j] = df.loc[mask, 'correct'].sum()
-        data2c[i, j] = df.loc[mask, 'η_avg'].sum()
+        data2c[i, j] = df.loc[mask, 'ξ_avg'].sum()
         num_rep[i, j] = mask.sum()
 num_rep[num_rep == 0] = 1
 data2a /= num_rep
 data2b /= num_rep
 data2c /= num_rep
 #--------------------------------------------
-df = pd.read_csv(f'data/{input}-S1-R1.csv')
+df = pd.read_csv(f'data_SM/{input}-S1-R1.csv')
 data3a = np.zeros((len(k1s), len(k2s)))
 data3b = np.zeros((len(k1s), len(k2s)))
 data3c = np.zeros((len(k1s), len(k2s)))
@@ -79,7 +79,7 @@ for i in range(len(k1s)):
         mask = (df['k1_avg'] >= k1_min) & (df['k1_avg'] < k1_max) & (df['k2_avg'] >= k2_min) & (df['k2_avg'] < k2_max)
         data3a[i, j] = df.loc[mask, 'prob_avg'].sum()
         data3b[i, j] = df.loc[mask, 'correct'].sum()
-        data3c[i, j] = df.loc[mask, 'η_avg'].sum()
+        data3c[i, j] = df.loc[mask, 'ξ_avg'].sum()
         num_rep[i, j] = mask.sum()
 num_rep[num_rep == 0] = 1
 data3a /= num_rep
@@ -126,7 +126,7 @@ def pastel_cmap(cmap):
     n = cmap.N
     pastel_colors = np.clip(cmap(np.linspace(0, 1, n)) + 0.1, 0, 1)
     return sns.blend_palette(pastel_colors, n_colors=n, as_cmap=True)
-cmapp = pastel_cmap(cmapp) # 'viridis'
+cmapp = pastel_cmap(cmapp)
 
 c1a = ax1a.pcolormesh(k1s, k2s, data1a, cmap=cmapp, linewidth=0, rasterized=True, vmin=0, vmax=1.0)
 c2a = ax2a.pcolormesh(k1s, k2s, data2a, cmap=cmapp, linewidth=0, rasterized=True, vmin=0, vmax=1.0)
@@ -220,4 +220,4 @@ ax3a.set_aspect('equal')
 ax3b.set_aspect('equal')
 ax3c.set_aspect('equal')
 
-plt.savefig(f'plots/fig2-{input}-plot.pdf', dpi=300)
+plt.savefig(f'plots_SM/figS3-{input}-plot.pdf', dpi=300)
